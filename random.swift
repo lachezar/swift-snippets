@@ -2,20 +2,18 @@ import Foundation
 
 func randomAlphanumericString(length: Int) -> String {
 
-    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    let lettersLength = UInt32(count(letters))
+    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".characters
+    let lettersLength = UInt32(letters.count)
 
-    var result = ""
-
-    for (var i = 0; i < length; i++) {
-        let randomIndex = Int(arc4random_uniform(lettersLength))
-        let c = letters[advance(letters.startIndex, randomIndex)]
-        result.append(c)
+    let randomCharacters = (0..<length).map { i -> String in
+        let offset = Int(arc4random_uniform(lettersLength))
+        let c = letters[letters.startIndex.advancedBy(offset)]
+        return String(c)
     }
 
-    return result
+    return randomCharacters.joinWithSeparator("")
 }
 
 assert(randomAlphanumericString(10) != randomAlphanumericString(10))
-assert(count(randomAlphanumericString(10)) == 10)
+assert(randomAlphanumericString(10).characters.count == 10)
 
