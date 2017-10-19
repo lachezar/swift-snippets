@@ -1,10 +1,10 @@
 // the emoji swaperoo operator
 
-infix operator ♻️  { }
-func ♻️  <T>(inout left: T, inout right: T) {
-    var tmp = left
-	left = right
-	right = tmp
+infix operator ♻️
+func ♻️  <T>( left: inout T, right: inout T) {
+    let tmp = left
+    left = right
+    right = tmp
 }
 
 var a = 3
